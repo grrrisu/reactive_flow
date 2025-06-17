@@ -4,6 +4,7 @@ defmodule ReactiveFlow.OrderProcessor do
   Maintains statistics and triggers the reactive chain when orders are submitted.
   """
   use GenServer
+  alias ReactiveFlow.{InventoryChecker, Analytics}
 
   def start_link(opts \\ []) do
     GenServer.start_link(__MODULE__, [], name: __MODULE__)

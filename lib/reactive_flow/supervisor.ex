@@ -6,6 +6,14 @@ defmodule ReactiveFlow.Supervisor do
   """
   use Supervisor
 
+  alias ReactiveFlow.{
+    OrderProcessor,
+    InventoryChecker,
+    PaymentProcessor,
+    Fulfillment,
+    Analytics
+  }
+
   def start_link(opts) do
     Supervisor.start_link(__MODULE__, :ok, opts)
   end

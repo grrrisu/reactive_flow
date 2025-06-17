@@ -5,6 +5,8 @@ defmodule ReactiveFlow.PaymentProcessor do
   """
   use GenServer
 
+  alias ReactiveFlow.Fulfillment
+
   def start_link(opts \\ []) do
     GenServer.start_link(__MODULE__, %{}, name: __MODULE__)
   end

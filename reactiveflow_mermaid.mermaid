@@ -21,13 +21,6 @@ graph TD
     A_Timer -->|check_metrics| A
     A -->|get_metrics| Metrics[📈 Metrics]
     
-    %% Supervision
-    S[ReactiveFlow.Supervisor] -.->|supervises| OP
-    S -.->|supervises| IC
-    S -.->|supervises| PP
-    S -.->|supervises| F
-    S -.->|supervises| A
-    
     %% Styling
     classDef genserver fill:#e1f5fe,stroke:#01579b,stroke-width:2px
     classDef timer fill:#fff3e0,stroke:#e65100,stroke-width:2px
