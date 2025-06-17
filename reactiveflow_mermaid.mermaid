@@ -1,0 +1,42 @@
+graph TD
+    User[👤 User] -->|submit_order| OP[OrderProcessor]
+    
+    OP -->|new_order| IC[InventoryChecker]
+    OP -->|get_stats| Stats[📊 Statistics]
+    
+    IC -->|send_after| IC_Timer[⏰ Inventory Timer]
+    IC_Timer -->|inventory_result| IC
+    IC -->|check_inventory| PP[PaymentProcessor]
+    
+    PP -->|send_after| PP_Timer[⏰ Payment Timer]
+    PP_Timer -->|payment_result| PP
+    PP -->|process_payment| F[Fulfillment]
+    
+    F -->|send_after| F_Timer[⏰ Fulfillment Timer]
+    F_Timer -->|fulfillment_complete| F
+    F -->|fulfill_order| OP
+    
+    OP -->|order_completed| A[Analytics]
+    A -->|send_after| A_Timer[⏰ Analytics Timer]
+    A_Timer -->|check_metrics| A
+    A -->|get_metrics| Metrics[📈 Metrics]
+    
+    %% Supervision
+    S[ReactiveFlow.Supervisor] -.->|supervises| OP
+    S -.->|supervises| IC
+    S -.->|supervises| PP
+    S -.->|supervises| F
+    S -.->|supervises| A
+    
+    %% Styling
+    classDef genserver fill:#e1f5fe,stroke:#01579b,stroke-width:2px
+    classDef timer fill:#fff3e0,stroke:#e65100,stroke-width:2px
+    classDef supervisor fill:#f3e5f5,stroke:#4a148c,stroke-width:2px
+    classDef user fill:#e8f5e8,stroke:#2e7d32,stroke-width:2px
+    classDef data fill:#fff8e1,stroke:#f57f17,stroke-width:2px
+    
+    class OP,IC,PP,F,A genserver
+    class IC_Timer,PP_Timer,F_Timer,A_Timer timer
+    class S supervisor
+    class User user
+    class Stats,Metrics data

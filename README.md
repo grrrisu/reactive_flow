@@ -98,16 +98,15 @@ Supervisor.init(children, strategy: :one_for_one)
 
 ### Running the Demo
 
-1. Start an Elixir session:
 ```bash
-iex
+mix deps.get
+iex -S mix
 ```
 
-2. Copy the ReactiveFlow code into your session
+Then in IEx:
 
-3. Run the interactive demo:
 ```elixir
-Demo.run_demo()
+ReactiveFlow.Demo.run_demo()
 ```
 
 ### Example Output
